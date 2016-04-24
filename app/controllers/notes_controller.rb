@@ -18,9 +18,9 @@ class NotesController < ApplicationController
     @note = Note.new(note_params)
 
     if @note.save
-      render :show, status: :created, location: @note
+
     else
-      render json: @note.errors, status: :unprocessable_entity
+      render :errors, status: 400
     end
   end
 
@@ -48,6 +48,6 @@ class NotesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def note_params
-      params.require(:note).permit(:title, :body)
+      params.permit(:title, :body, :tags)
     end
 end
